@@ -16,31 +16,36 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme
-                    BaseTheme="Light"
-                    PrimaryColor="DeepPurple"
-                    SecondaryColor="Lime" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WpfControlLib;component/SharedDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+
     <UserControl.DataContext>
         <local:MainWindowViewModel />
     </UserControl.DataContext>
 
-    <Grid>
-        <StackPanel
-            Margin="30,30,0,0"
-            VerticalAlignment="Top"
-            Orientation="Horizontal">
-            <Button x:Name="SettingButton" Margin="10">
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="Settings" />
-                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center">
-                        設定
-                    </TextBlock>
+    <TabControl>
+        <TabItem Header="Play">
+            <Grid>
+                <StackPanel
+                    Margin="30,30,0,0"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+                    <Button x:Name="SettingButton" Margin="10">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Play" />
+                            <TextBlock Margin="4,0,0,0" VerticalAlignment="Center">再生</TextBlock>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
-            </Button>
-        </StackPanel>
-    </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Edit">
+            <local:EditTab x:Name="EditTab" />
+        </TabItem>
+        <TabItem Header="Settings">
+            <local:SettingsTab x:Name="SettingsTab" />
+        </TabItem>
+    </TabControl>
 </UserControl>
