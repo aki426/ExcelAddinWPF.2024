@@ -29,6 +29,10 @@ VSTO Addin for Excel with WPF sample Ver.2024
    1. 参照関係として、VSTOプロジェクト -> WPFプロジェクト -> Officeライブラリプロジェクトという関係にする。
    2. WPFプロジェクトからはOfficeライブラリプロジェクトを操作するだけにするとよい。どのみちMicrosoft.Office.Interop.*はGlobalsから取得できるグローバル変数のような扱いであり、GCやリソース管理についてあまり深く考えなくても使用できる。
 
+## メモ
+
+CommunityToolkitを使う予定だったが、ReactiveCollectionに相当する機能が無いらしく悩ましい。
+
 ## 参考
 
 - [WPF Tips - Material Designにする](https://qiita.com/yossihard/items/df994b9e4005c3b46da0)
