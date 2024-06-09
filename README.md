@@ -39,3 +39,4 @@ CommunityToolkitを使う予定だったが、ReactiveCollectionに相当する�
 - [Material Design In XAML Toolkit 4.9→5.0 バージョンアップ時のエラーと解決策](https://qiita.com/programing_diy_kanrinin/items/d7d550a83b48a54bafd0)
 - [MaterialDesignInXamlToolkit Getting Started](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Getting-Started)
 - [CommunityToolkit.Mvvm V8 入門](https://qiita.com/kk-river/items/d974b02f6c4010433a9e)
+- [[WPF] Collection への要素の追加を即時に ListBox に反映する方法](https://mseeeen.msen.jp/wpf-mvvm-for-listbox/)
