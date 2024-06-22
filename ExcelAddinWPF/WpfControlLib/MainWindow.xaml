@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:WpfControlLib"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="600"
+    d:DesignWidth="500"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -17,6 +17,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/WpfControlLib;component/SharedDictionary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WpfControlLib;component/ScrollableTabControlStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -25,8 +26,17 @@
         <local:MainWindowViewModel />
     </UserControl.DataContext>
 
-    <TabControl>
-        <TabItem Header="Play">
+    <TabControl materialDesign:ColorZoneAssist.Mode="PrimaryMid" Style="{StaticResource ScrollableTabControl}">
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Home" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="HOME" />
+                </StackPanel>
+            </TabItem.Header>
             <Grid>
                 <StackPanel
                     Margin="30,30,0,0"
@@ -41,10 +51,51 @@
                 </StackPanel>
             </Grid>
         </TabItem>
-        <TabItem Header="Edit">
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="PencilBox" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Edit" />
+                </StackPanel>
+            </TabItem.Header>
             <local:EditTab x:Name="EditTab" />
         </TabItem>
-        <TabItem Header="Settings">
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="EmailFastOutline" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Send" />
+                </StackPanel>
+            </TabItem.Header>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="TextBoxCheck" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Valid" />
+                </StackPanel>
+            </TabItem.Header>
+        </TabItem>
+
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Cog" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Settings" />
+                </StackPanel>
+            </TabItem.Header>
             <local:SettingsTab x:Name="SettingsTab" />
         </TabItem>
     </TabControl>

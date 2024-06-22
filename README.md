@@ -8,6 +8,7 @@ VSTO Addin for Excel with WPF sample Ver.2024
 - .Net Framework 4.8.1
 - VSTO Addin
 - CommunityToolkit
+- ReactiveProperty
 
 ## Project settings
 

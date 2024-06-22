@@ -1,0 +1,58 @@
+﻿<UserControl
+    x:Class="WpfControlLib.SettingsTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfControlLib"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WpfControlLib;component/SharedDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <UserControl.DataContext>
+        <local:SettingsTabViewModel />
+    </UserControl.DataContext>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+            Text="設定画面のサンプルです。" />
+
+        <CheckBox
+            Grid.Row="1"
+            Margin="0,15,0,0"
+            materialDesign:CheckBoxAssist.CheckBoxSize="30"
+            IsChecked="{Binding IsLargeFontCheckBoxFlag.Value, Mode=TwoWay}">
+            <CheckBox.Content>
+                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="大き目で見やすいチェックボックス" />
+            </CheckBox.Content>
+        </CheckBox>
+
+        <CheckBox
+            Grid.Row="2"
+            Margin="0,15,0,0"
+            materialDesign:RippleAssist.IsDisabled="True"
+            Content="Ripple disabled"
+            IsChecked="True" />
+    </Grid>
+</UserControl>

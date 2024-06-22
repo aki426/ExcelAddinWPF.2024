@@ -13,5 +13,5 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <sys:Double x:Key="IconSize">32</sys:Double>
+    <sys:Double x:Key="IconSize">20</sys:Double>
 </ResourceDictionary>
