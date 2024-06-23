@@ -103,6 +103,7 @@
   <ItemGroup>
     <Compile Include="CursorInfo.cs" />
     <Compile Include="DragAdorner.cs" />
+    <Compile Include="ListBoxDragDropBehavior.cs" />
     <Compile Include="SampleListItemViewModel.cs" />
     <Compile Include="Tabs\EditTab.xaml.cs">
       <DependentUpon>EditTab.xaml</DependentUpon>

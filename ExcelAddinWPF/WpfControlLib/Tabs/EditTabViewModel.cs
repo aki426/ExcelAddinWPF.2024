@@ -65,7 +65,7 @@ namespace WpfControlLib
             // ReactiveCollectionの初期化
             ListItems = new ReactiveCollection<SampleListItemViewModel>()
                 .AddTo(this._disposables);
-            foreach (var item in new List<string>() { "Item1", "Item2", "Item3", "Item4", "Item5" })
+            foreach (var item in new List<string>() { "Item 1", "アイテム 2", "あいてむ 3", "項目 4", "項目 五" })
             {
                 ListItems.Add(new SampleListItemViewModel(item));
             }
