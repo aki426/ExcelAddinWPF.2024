@@ -35,6 +35,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -45,8 +46,8 @@
 
             <TextBlock
                 Grid.Column="0"
-                Style="{StaticResource MaterialDesignBody2TextBlock}"
-                Text="なんとなく更新ボタン" />
+                Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                Text="設定画面タブのパラメータ変更を検知する" />
 
             <Button
                 Grid.Column="1"
@@ -84,13 +85,19 @@
 
         <TextBlock
             Grid.Row="3"
-            Margin="0,10,0,0"
-            Style="{StaticResource MaterialDesignBody2TextBlock}"
+            Margin="0,15,0,0"
+            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
             Text="ListBoxのサンプル" />
+
+        <TextBlock
+            Grid.Row="4"
+            Margin="0,10,0,0"
+            Style="{StaticResource MaterialDesignBody1TextBlock}"
+            Text="DragHandleをつまんで順番を入れ替えることが可能" />
 
         <ListBox
             Name="listBox"
-            Grid.Row="4"
+            Grid.Row="5"
             Margin="0,10,0,0"
             HorizontalContentAlignment="Stretch"
             ItemsSource="{Binding ListItems}"
@@ -125,6 +132,7 @@
                             Cursor="Hand">
                             <materialDesign:PackIcon
                                 VerticalAlignment="Center"
+                                Background="Transparent"
                                 Foreground="Gray"
                                 Kind="Menu" />
                         </Border>

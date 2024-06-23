@@ -48,6 +48,11 @@ namespace WpfControlLib
             AssociatedObject.Drop -= ListBox_Drop;
         }
 
+        /// <summary>
+        /// DragHandleアイテムかどうかを判定する。
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
         private bool IsDragHandle(DependencyObject element)
         {
             while (element != null && !(element is ListBoxItem))
@@ -61,6 +66,11 @@ namespace WpfControlLib
             return false;
         }
 
+        /// <summary>
+        /// D&D対象のListBoxオブジェクトを取得する関数。
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
         private object FindListBoxItem(DependencyObject element)
         {
             while (element != null && !(element is ListBoxItem))
@@ -107,7 +117,7 @@ namespace WpfControlLib
                 if (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
                     Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
                 {
-                    ListBox listBox = sender as ListBox;
+                    //ListBox listBox = sender as ListBox;
                     ListBoxItem listBoxItem = FindAncestor<ListBoxItem>((DependencyObject)e.OriginalSource);
 
                     if (listBoxItem != null)
@@ -124,22 +134,25 @@ namespace WpfControlLib
         /// </summary>
         private void ListBox_Drop(object sender, DragEventArgs e)
         {
-            ListBox listBox = sender as ListBox;
-            object data = e.Data.GetData(draggedItem.GetType());
-            if (data != null)
+            if(draggedItem != null)
             {
-                // ドラッグ元とドロップ先のインデックスを取得
-                int removeIndex = listBox.Items.IndexOf(draggedItem);
-                object nearestItem = GetNearestItem(e.GetPosition(listBox));
-                int insertIndex = nearestItem != null ? listBox.Items.IndexOf(nearestItem) : -1;
-
-                // Drop先のインデックス正常に取得できており、Drop元と異なる場合のみ、アイテムを移動
-                if (0 <= insertIndex && removeIndex != insertIndex)
+                ListBox listBox = sender as ListBox;
+                object data = e.Data.GetData(draggedItem.GetType());
+                if (data != null)
                 {
-                    if (listBox.ItemsSource is System.Collections.IList list)
+                    // ドラッグ元とドロップ先のインデックスを取得
+                    int removeIndex = listBox.Items.IndexOf(draggedItem);
+                    object nearestItem = GetNearestItem(e.GetPosition(listBox));
+                    int insertIndex = nearestItem != null ? listBox.Items.IndexOf(nearestItem) : -1;
+
+                    // Drop先のインデックス正常に取得できており、Drop元と異なる場合のみ、アイテムを移動
+                    if (0 <= insertIndex && removeIndex != insertIndex)
                     {
-                        list.Remove(draggedItem);
-                        list.Insert(insertIndex, draggedItem);
+                        if (listBox.ItemsSource is System.Collections.IList list)
+                        {
+                            list.Remove(draggedItem);
+                            list.Insert(insertIndex, draggedItem);
+                        }
                     }
                 }
             }
