@@ -105,10 +105,15 @@
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:SampleListItemViewModel}">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon
-                            VerticalAlignment="Center"
-                            Foreground="Gray"
-                            Kind="Menu" />
+                        <Border
+                            x:Name="DragHandle"
+                            Background="Transparent"
+                            Cursor="Hand">
+                            <materialDesign:PackIcon
+                                VerticalAlignment="Center"
+                                Foreground="Gray"
+                                Kind="Menu" />
+                        </Border>
                         <CheckBox
                             Margin="5,0,0,0"
                             VerticalAlignment="Center"

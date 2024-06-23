@@ -48,13 +48,45 @@ namespace WpfControlLib
             AssociatedObject.Drop -= ListBox_Drop;
         }
 
+        private bool IsDragHandle(DependencyObject element)
+        {
+            while (element != null && !(element is ListBoxItem))
+            {
+                if (element is FrameworkElement fe && fe.Name == "DragHandle")
+                {
+                    return true;
+                }
+                element = VisualTreeHelper.GetParent(element);
+            }
+            return false;
+        }
+
+        private object FindListBoxItem(DependencyObject element)
+        {
+            while (element != null && !(element is ListBoxItem))
+            {
+                element = VisualTreeHelper.GetParent(element);
+            }
+
+            if (element is ListBoxItem listBoxItem)
+            {
+                return (AssociatedObject as ListBox).ItemContainerGenerator.ItemFromContainer(listBoxItem);
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// マウスの左ボタンが押されたときのイベントハンドラ
         /// </summary>
         private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // ドラッグ開始位置を記録
-            startPoint = e.GetPosition(null);
+            if (IsDragHandle(e.OriginalSource as DependencyObject))
+            {
+                // ドラッグ開始位置を記録
+                startPoint = e.GetPosition(null);
+                draggedItem = FindListBoxItem(e.OriginalSource as DependencyObject);
+            }
         }
 
         /// <summary>
@@ -62,7 +94,7 @@ namespace WpfControlLib
         /// </summary>
         private void ListBox_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed && draggedItem != null)
             {
                 Point mousePos = e.GetPosition(null);
                 Vector diff = startPoint - mousePos;
@@ -77,7 +109,6 @@ namespace WpfControlLib
                     if (listBoxItem != null)
                     {
                         // ドラッグするアイテムを特定し、ドラッグ処理を開始
-                        draggedItem = listBox.ItemContainerGenerator.ItemFromContainer(listBoxItem);
                         DragDrop.DoDragDrop(listBoxItem, draggedItem, DragDropEffects.Move);
                     }
                 }
@@ -95,13 +126,12 @@ namespace WpfControlLib
             {
                 // ドラッグ元とドロップ先のインデックスを取得
                 int removeIndex = listBox.Items.IndexOf(draggedItem);
-                int insertIndex = listBox.Items.IndexOf(GetNearestItem(e.GetPosition(listBox)));
+                object nearestItem = GetNearestItem(e.GetPosition(listBox));
+                int insertIndex = nearestItem != null ? listBox.Items.IndexOf(nearestItem) : -1;
 
-                // インデックスが異なる場合のみ、アイテムを移動
-                if (removeIndex != insertIndex)
+                // Drop先のインデックス正常に取得できており、Drop元と異なる場合のみ、アイテムを移動
+                if (0 <= insertIndex && removeIndex != insertIndex)
                 {
-                    //listBox.Items.
-
                     if (listBox.ItemsSource is System.Collections.IList list)
                     {
                         list.Remove(draggedItem);
@@ -139,12 +169,12 @@ namespace WpfControlLib
         private object GetNearestItem(Point position)
         {
             UIElement element = AssociatedObject.InputHitTest(position) as UIElement;
+            // ドラッグ先のオブジェクトがListBoxItem内のアイテムだった場合、親アイテムをサーチしてListBoxItemを探す。
             while (element != null)
             {
-                object item = AssociatedObject.ItemContainerGenerator.ItemFromContainer(element);
-                if (item != DependencyProperty.UnsetValue)
+                if (element is ListBoxItem listBoxItem)
                 {
-                    return item;
+                    return AssociatedObject.ItemContainerGenerator.ItemFromContainer(listBoxItem);
                 }
                 element = VisualTreeHelper.GetParent(element) as UIElement;
             }
