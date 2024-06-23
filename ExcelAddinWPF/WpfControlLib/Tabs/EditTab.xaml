@@ -104,17 +104,14 @@
 
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:SampleListItemViewModel}">
-                    <StackPanel Orientation="Horizontal">
-                        <Border
-                            x:Name="DragHandle"
-                            Background="Transparent"
-                            Cursor="Hand">
-                            <materialDesign:PackIcon
-                                VerticalAlignment="Center"
-                                Foreground="Gray"
-                                Kind="Menu" />
-                        </Border>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
                         <CheckBox
+                            Grid.Column="0"
                             Margin="5,0,0,0"
                             VerticalAlignment="Center"
                             materialDesign:CheckBoxAssist.CheckBoxSize="24"
@@ -123,7 +120,22 @@
                                 <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding ItemName.Value, Mode=OneWay}" />
                             </CheckBox.Content>
                         </CheckBox>
-                    </StackPanel>
+                        <Border
+                            x:Name="DragHandle"
+                            Grid.Column="1"
+                            Margin="0,0,15,0"
+                            Background="Transparent"
+                            Cursor="Hand">
+                            <materialDesign:Card Padding="2,0,2,0" materialDesign:ElevationAssist.Elevation="Dp0">
+                                <materialDesign:Card.Content>
+                                    <materialDesign:PackIcon
+                                        VerticalAlignment="Center"
+                                        Foreground="Gray"
+                                        Kind="Menu" />
+                                </materialDesign:Card.Content>
+                            </materialDesign:Card>
+                        </Border>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

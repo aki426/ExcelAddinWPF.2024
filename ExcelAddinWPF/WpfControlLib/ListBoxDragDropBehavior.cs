@@ -87,6 +87,10 @@ namespace WpfControlLib
                 startPoint = e.GetPosition(null);
                 draggedItem = FindListBoxItem(e.OriginalSource as DependencyObject);
             }
+            else
+            {
+                draggedItem = null;
+            }
         }
 
         /// <summary>
@@ -139,6 +143,8 @@ namespace WpfControlLib
                     }
                 }
             }
+
+            draggedItem = null;
         }
 
         /// <summary>
