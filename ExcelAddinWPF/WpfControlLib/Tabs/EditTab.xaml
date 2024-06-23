@@ -102,39 +102,49 @@
                 <local:ListBoxDragDropBehavior />
             </i:Interaction.Behaviors>
 
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="0,4,0,0" />
+                    <!--  下に10の余白を追加  -->
+                </Style>
+            </ListBox.ItemContainerStyle>
+
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:SampleListItemViewModel}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <CheckBox
-                            Grid.Column="0"
-                            Margin="5,0,0,0"
-                            VerticalAlignment="Center"
-                            materialDesign:CheckBoxAssist.CheckBoxSize="24"
-                            IsChecked="{Binding IsCheckedFlag.Value, Mode=TwoWay}">
-                            <CheckBox.Content>
-                                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding ItemName.Value, Mode=OneWay}" />
-                            </CheckBox.Content>
-                        </CheckBox>
                         <Border
                             x:Name="DragHandle"
-                            Grid.Column="1"
-                            Margin="0,0,15,0"
+                            Grid.Column="0"
+                            Margin="5,0,5,0"
                             Background="Transparent"
                             Cursor="Hand">
-                            <materialDesign:Card Padding="2,0,2,0" materialDesign:ElevationAssist.Elevation="Dp0">
-                                <materialDesign:Card.Content>
-                                    <materialDesign:PackIcon
-                                        VerticalAlignment="Center"
-                                        Foreground="Gray"
-                                        Kind="Menu" />
-                                </materialDesign:Card.Content>
-                            </materialDesign:Card>
+                            <materialDesign:PackIcon
+                                VerticalAlignment="Center"
+                                Foreground="Gray"
+                                Kind="Menu" />
                         </Border>
+
+                        <materialDesign:Card
+                            Grid.Column="1"
+                            Margin="5,0,0,0"
+                            Padding="3"
+                            materialDesign:ElevationAssist.Elevation="Dp0">
+                            <materialDesign:Card.Content>
+                                <CheckBox
+                                    VerticalAlignment="Center"
+                                    materialDesign:CheckBoxAssist.CheckBoxSize="24"
+                                    IsChecked="{Binding IsCheckedFlag.Value, Mode=TwoWay}">
+                                    <CheckBox.Content>
+                                        <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Text="{Binding ItemName.Value, Mode=OneWay}" />
+                                    </CheckBox.Content>
+                                </CheckBox>
+                            </materialDesign:Card.Content>
+                        </materialDesign:Card>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
