@@ -27,6 +27,14 @@
     </UserControl.DataContext>
 
     <TabControl materialDesign:ColorZoneAssist.Mode="PrimaryMid" Style="{StaticResource ScrollableTabControl}">
+        <TabControl.ContentTemplate>
+            <DataTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ContentPresenter Content="{Binding}" />
+                </ScrollViewer>
+            </DataTemplate>
+        </TabControl.ContentTemplate>
+
         <TabItem>
             <TabItem.Header>
                 <StackPanel Orientation="Horizontal">
@@ -82,6 +90,42 @@
                         Margin="4,0,0,0"
                         VerticalAlignment="Center"
                         Text="Valid" />
+                </StackPanel>
+            </TabItem.Header>
+        </TabItem>
+
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Alarm" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Dummy01" />
+                </StackPanel>
+            </TabItem.Header>
+        </TabItem>
+
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="BankTransfer" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Dummy02" />
+                </StackPanel>
+            </TabItem.Header>
+        </TabItem>
+
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Clapperboard" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Dummy03" />
                 </StackPanel>
             </TabItem.Header>
         </TabItem>
