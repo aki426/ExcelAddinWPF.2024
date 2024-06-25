@@ -182,25 +182,5 @@ namespace WpfControlLib
             while (current != null);
             return null;
         }
-
-        /// <summary>
-        /// 指定された位置に最も近いリストアイテムを取得
-        /// </summary>
-        /// <param name="position">チェックする位置</param>
-        /// <returns>最も近いリストアイテム、見つからない場合はnull</returns>
-        private object GetNearestItem(Point position)
-        {
-            UIElement element = AssociatedObject.InputHitTest(position) as UIElement;
-            // ドラッグ先のオブジェクトがListBoxItem内のオブジェクトだった場合、親オブジェクトをサーチしてListBoxItemを探す。
-            while (element != null)
-            {
-                if (element is ListBoxItem listBoxItem)
-                {
-                    return AssociatedObject.ItemContainerGenerator.ItemFromContainer(listBoxItem);
-                }
-                element = VisualTreeHelper.GetParent(element) as UIElement;
-            }
-            return null;
-        }
     }
 }
