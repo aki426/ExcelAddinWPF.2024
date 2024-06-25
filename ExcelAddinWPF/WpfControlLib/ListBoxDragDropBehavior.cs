@@ -7,6 +7,9 @@ using System.Windows.Media;
 
 namespace WpfControlLib
 {
+    // NOTE: D&D中にゴーストを表示させる方法は次のページが詳しい。
+    // http://main.tinyjoker.net/Tech/CSharp/WPF/ListBox%A4%CE%A5%A2%A5%A4%A5%C6%A5%E0%A4%F2%C8%BE%C6%A9%CC%C0%A5%B4%A1%BC%A5%B9%A5%C8%A4%C4%A4%AD%A5%C9%A5%E9%A5%C3%A5%B0%A5%A2%A5%F3%A5%C9%A5%C9%A5%ED%A5%C3%A5%D7%A4%C7%CA%C2%A4%D9%C2%D8%A4%A8%A4%EB.html#footer
+
     /// <summary>
     /// ListBoxにドラッグ＆ドロップ機能を追加するビヘイビア
     /// </summary>
@@ -134,7 +137,7 @@ namespace WpfControlLib
         /// </summary>
         private void ListBox_Drop(object sender, DragEventArgs e)
         {
-            if(draggedItem != null)
+            if (draggedItem != null)
             {
                 ListBox listBox = sender as ListBox;
                 object data = e.Data.GetData(draggedItem.GetType());
@@ -142,7 +145,7 @@ namespace WpfControlLib
                 {
                     // ドラッグ元とドロップ先のインデックスを取得
                     int removeIndex = listBox.Items.IndexOf(draggedItem);
-                    object nearestItem = GetNearestItem(e.GetPosition(listBox));
+                    object nearestItem = FindListBoxItem(e.OriginalSource as DependencyObject);
                     int insertIndex = nearestItem != null ? listBox.Items.IndexOf(nearestItem) : -1;
 
                     // Drop先のインデックス正常に取得できており、Drop元と異なる場合のみ、アイテムを移動
@@ -188,7 +191,7 @@ namespace WpfControlLib
         private object GetNearestItem(Point position)
         {
             UIElement element = AssociatedObject.InputHitTest(position) as UIElement;
-            // ドラッグ先のオブジェクトがListBoxItem内のアイテムだった場合、親アイテムをサーチしてListBoxItemを探す。
+            // ドラッグ先のオブジェクトがListBoxItem内のオブジェクトだった場合、親オブジェクトをサーチしてListBoxItemを探す。
             while (element != null)
             {
                 if (element is ListBoxItem listBoxItem)
