@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Deployment.Application;
 using System.Linq;
-using System.Text;
 
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -98,6 +97,12 @@ namespace ExcelAddinWPF
                 customTaskPane.VisibleChanged += CustomTaskPaneClose_Click;
             }
         }
+
+        // NOTE: 【カスタム作業ウィンドウの横幅の最小値について】
+        // 例えば、カスタム作業ウィンドウの横幅を600pixel以下に縮めることができないように規制する方法は提供されていない。
+        // CustomTaskPaneにMinWidthプロパティは無く、またWidhChangedイベントも提供されていない。
+        // ThisAddinなどにTimerをセットして600pixel以下になったら600pixelに戻す、という方法もあるがスマートではない。
+        // UserControlのMinimumSizeでコンテンツの表示は最小横幅を設定可能なので一旦それで対応するのが良さそう。
 
         /// <summary>
         /// カスタム作業ウィンドウを閉じる際のイベントハンドラです。

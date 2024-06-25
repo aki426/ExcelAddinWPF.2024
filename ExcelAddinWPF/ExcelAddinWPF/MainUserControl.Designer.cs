@@ -47,6 +47,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.elementHost1);
+            this.MinimumSize = new System.Drawing.Size(600, 0);
             this.Name = "MainUserControl";
             this.Size = new System.Drawing.Size(768, 620);
             this.ResumeLayout(false);
